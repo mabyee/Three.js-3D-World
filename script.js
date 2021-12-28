@@ -5,7 +5,7 @@ var windowHeight = window.innerHeight;
 //setup
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, windowWidth / windowHeight, 0.1, 1000 )
-camera.position.set(0,0,5);
+camera.position.set(1,-10,10);
 
 // renderer setup
 var renderer = new THREE.WebGLRenderer();
@@ -26,13 +26,21 @@ window.addEventListener('resize',function()
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // lighting
-var light = new THREE.PointLight(0xffffff,2,100);
-light.position.set(50,50,50);
-//scene.add(light);
-
 var AmbientLight = new THREE.AmbientLight(0xffffff,0.3,100);
 scene.add(AmbientLight);
 
+//---PLANE---
+var planeG = new THREE.PlaneGeometry(10,10);
+var planeT = new THREE.MeshPhongMaterial({color: 0xff00ff});
+var planeM = new THREE.Mesh(planeG,planeT);
+planeM.rotation.x = -Math.PI/2;
+
+// Car Controls
+
+//Markers
+markerMx.position.x = 5;
+markerMy.position.y = 5;
+markerMz.position.z = 5;
 //---CAR---
 // position of car components
 // X
@@ -60,9 +68,18 @@ var wallG = new THREE.BoxGeometry(0.5,3,3);
 var wallM = new THREE.MeshPhongMaterial({color: 0xff0000});
 var wall1 = new THREE.Mesh(wallG,wallM);
 wall1.position.x = -5;
+
+// attach camera to car
+body.add( camera );
+camera.position.set( 10,4,0 );
+camera.lookAt( body.position );
 // adding elements to scene
 scene.add(body);
 scene.add(wall1);
+scene.add(planeM);
+scene.add(markerMx);
+scene.add(markerMy);
+scene.add(markerMz);
 
 // logic
 var update = function()
