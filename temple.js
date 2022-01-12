@@ -79,8 +79,15 @@ var loadingM = new THREE.MeshPhongMaterial({color:0x0000ff});
 var loadingSymbol = new THREE.Mesh(loadingG,loadingM);
 loadingSymbol.position.set(0,0,-50);
 loadingSymbol.rotation.y = Math.PI/2;
-//Art 3 - Changing text
-
-
-
+//Art 3 - Tree
+var treeTrunkG = new THREE.CylinderGeometry(2,3,20,10,1);
+var treeTrunkM = new THREE.MeshPhongMaterial({color:0x964b00});
+var treeTrunk = new THREE.Mesh(treeTrunkG,treeTrunkM);
+treeTrunk.position.set(-30,-10,0);
+var treeTopG = new THREE.TorusKnotGeometry(5,5,170,6,14,16); //using torus knot geometry to make the tree top
+var treeTopM = new THREE.MeshPhongMaterial({color:0x618a3d});
+var treeTop = new THREE.Mesh(treeTopG,treeTopM);
+treeTop.rotation.x = Math.PI/2;
+treeTop.position.set(0,10,0);
+treeTrunk.add(treeTop);
 

@@ -4,7 +4,7 @@ var windowHeight = window.innerHeight;
 
 //setup
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, windowWidth / windowHeight, 0.1, 1000 )
+var camera = new THREE.PerspectiveCamera(75, windowWidth / windowHeight, 0.1, 5000 )
 camera.position.set(1,10,70);
 
 // renderer setup
@@ -36,12 +36,37 @@ pointLight2.position.set(-30,30,-100);
 scene.add(pointLight2);
 
 //---PLANE---
-var planeG = new THREE.PlaneGeometry(400,400);
+var planeG = new THREE.PlaneGeometry(1000,1000);
 var planeT = new THREE.MeshPhongMaterial({color: 0x00ff00});
 var plane = new THREE.Mesh(planeG,planeT);
 plane.position.set(50,-20,0);
 plane.rotation.x = -Math.PI/2;
 plane.receiveShadow = true;
+
+//SkyBox
+
+let skyArray = [];
+const ft = new THREE.TextureLoader().load("images/bluecloud_ft.jpg");
+const bk = new THREE.TextureLoader().load("images/bluecloud_bk.jpg");
+const up = new THREE.TextureLoader().load("images/bluecloud_up.jpg");
+const dn = new THREE.TextureLoader().load("images/bluecloud_dn.jpg");
+const rt = new THREE.TextureLoader().load("images/bluecloud_rt.jpg");
+const lf = new THREE.TextureLoader().load("images/bluecloud_lf.jpg");
+
+skyArray.push(new THREE.MeshBasicMaterial( { map: ft }));
+skyArray.push(new THREE.MeshBasicMaterial( { map: bk }));
+skyArray.push(new THREE.MeshBasicMaterial( { map: up }));
+skyArray.push(new THREE.MeshBasicMaterial( { map: dn }));
+skyArray.push(new THREE.MeshBasicMaterial( { map: rt }));
+skyArray.push(new THREE.MeshBasicMaterial( { map: lf }));
+
+for(let i=0;i<6;i++){
+    skyArray[i].side = THREE.BackSide;
+
+    let skyboxG = new THREE.BoxGeometry(4000,4000,4000);
+    let skybox = new THREE.Mesh(skyboxG, skyArray);
+    scene.add(skybox);
+}
 
 
 //pillars
@@ -68,11 +93,19 @@ for(let i=0;i<125;i+=25){
     statueBaseClone.position.set(0,-10,-25-i);
     scene.add(statueBaseClone);
 }
+//trees
+for(let i=0;i<350;i+=25){
+    let j = Math.floor(Math.random() * 70); //place trees at random distances and height to eachother
+    var treeClone = treeTrunk.clone();
+    treeClone.position.set(-125+j,-10-j/15,-150+i+j/5);
+    scene.add(treeClone);
+}
 //remaining temple objects
 scene.add(plane);
 scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
+scene.add(treeTrunk);
 
 // logic
 var update = function()
