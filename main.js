@@ -11,6 +11,8 @@ camera.position.set(1,10,70);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(windowWidth, windowHeight);
 document.body.appendChild(renderer.domElement);
+renderer.shadowMap.enable = true;
+
 
 //adjust size on windows resize
 window.addEventListener('resize',function()
@@ -26,14 +28,8 @@ window.addEventListener('resize',function()
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // lighting
-var AmbientLight = new THREE.AmbientLight(0xffffff,0.7,100);
-scene.add(AmbientLight);
-var pointLight1 = new THREE.PointLight(0xffff00,1,100);
-pointLight1.position.set(30,30,30);
-scene.add(pointLight1);
-var pointLight2 = new THREE.PointLight(0xffff00,1,100);
-pointLight2.position.set(-30,30,-100);
-scene.add(pointLight2);
+var skyLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.9);
+scene.add(skyLight);
 
 //---PLANE---
 var planeG = new THREE.PlaneGeometry(1000,1000);
@@ -43,15 +39,14 @@ plane.position.set(50,-20,0);
 plane.rotation.x = -Math.PI/2;
 plane.receiveShadow = true;
 
-//SkyBox
-
+//SkyBox TODO: Add night box and trigger on button press (night/day)
 let skyArray = [];
-const ft = new THREE.TextureLoader().load("images/bluecloud_ft.jpg");
-const bk = new THREE.TextureLoader().load("images/bluecloud_bk.jpg");
-const up = new THREE.TextureLoader().load("images/bluecloud_up.jpg");
-const dn = new THREE.TextureLoader().load("images/bluecloud_dn.jpg");
-const rt = new THREE.TextureLoader().load("images/bluecloud_rt.jpg");
-const lf = new THREE.TextureLoader().load("images/bluecloud_lf.jpg");
+let ft = new THREE.TextureLoader().load("images/bluecloud_ft.jpg");
+let bk = new THREE.TextureLoader().load("images/bluecloud_bk.jpg");
+let up = new THREE.TextureLoader().load("images/bluecloud_up.jpg");
+let dn = new THREE.TextureLoader().load("images/bluecloud_dn.jpg");
+let rt = new THREE.TextureLoader().load("images/bluecloud_rt.jpg");
+let lf = new THREE.TextureLoader().load("images/bluecloud_lf.jpg");
 
 skyArray.push(new THREE.MeshBasicMaterial( { map: ft }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: bk }));
@@ -62,20 +57,18 @@ skyArray.push(new THREE.MeshBasicMaterial( { map: lf }));
 
 for(let i=0;i<6;i++){
     skyArray[i].side = THREE.BackSide;
-
     let skyboxG = new THREE.BoxGeometry(4000,4000,4000);
     let skybox = new THREE.Mesh(skyboxG, skyArray);
     scene.add(skybox);
 }
 
-
 //pillars
-scene.add(pillar);
 for(let i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
     var pillarClone = pillar.clone();
         pillarClone.position.set(i,0,0);
         scene.add(pillarClone);
 }
+
 //stairs
 for(let i = 0; i < 10; i+=2){
     var templeStairClone = templeStair.clone();
