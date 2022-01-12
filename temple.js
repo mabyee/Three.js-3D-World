@@ -55,6 +55,14 @@ var templeWallBG = new THREE.BoxGeometry(116,42,5);
 var templeWallB = new THREE.Mesh(templeWallBG,m);
 templeWallB.position.set(40,0,-140);
 
-
+//temple parts
 var templeParts = new THREE.Mesh; // adding all objects as one for efficiency
 templeParts.add(templeWallL, templeWallR, templeWallB, templeFloor, templeRoof);
+
+//Art/Statue base + light
+var statueBaseG = new THREE.BoxGeometry(10,5,10);
+var statueBase = new THREE.Mesh(statueBaseG,m);
+
+var statueLight = new THREE.PointLight(0xff00ff,0.5,20,2);
+statueBase.add(statueLight);
+statueLight.position.set(0,10,0);

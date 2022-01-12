@@ -43,18 +43,27 @@ planeM.rotation.x = -Math.PI/2;
 
 //pillars
 scene.add(pillar);
-for(var i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
+for(let i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
     var pillarClone = pillar.clone();
         pillarClone.position.set(i,0,0);
-        pillarClone.scale.set(1,1,1);
         scene.add(pillarClone);
 }
 //stairs
-for(var i = 0; i < 10; i+=2){
+for(let i = 0; i < 10; i+=2){
     var templeStairClone = templeStair.clone();
         templeStairClone.position.set(40,-12-i,i);
         templeStairClone.scale.set(1+i/50,1,1);
         scene.add(templeStairClone);
+}
+//statue bases
+for(let i=0;i<125;i+=25){
+    for(let j=0;j<125;j+=25){
+        var statueBaseClone = statueBase.clone();
+        statueBaseClone.position.set(80,-10,-25-j);
+        scene.add(statueBaseClone);
+    }
+    statueBaseClone.position.set(0,-10,-25-i);
+    scene.add(statueBaseClone);
 }
 //remaining temple objects
 scene.add(templeParts);
