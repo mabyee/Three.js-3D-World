@@ -36,10 +36,13 @@ pointLight2.position.set(-30,30,-100);
 scene.add(pointLight2);
 
 //---PLANE---
-var planeG = new THREE.PlaneGeometry(10,10);
-var planeT = new THREE.MeshPhongMaterial({color: 0xff00ff});
-var planeM = new THREE.Mesh(planeG,planeT);
-planeM.rotation.x = -Math.PI/2;
+var planeG = new THREE.PlaneGeometry(400,400);
+var planeT = new THREE.MeshPhongMaterial({color: 0x00ff00});
+var plane = new THREE.Mesh(planeG,planeT);
+plane.position.set(50,-20,0);
+plane.rotation.x = -Math.PI/2;
+plane.receiveShadow = true;
+
 
 //pillars
 scene.add(pillar);
@@ -66,13 +69,17 @@ for(let i=0;i<125;i+=25){
     scene.add(statueBaseClone);
 }
 //remaining temple objects
+scene.add(plane);
 scene.add(templeParts);
+scene.add(torusKnot);
+scene.add(loadingSymbol);
 
 // logic
 var update = function()
 {
-    //body.rotation.x += 0.001;
-    //body.rotation.y += 0.0005;
+    torusKnot.rotation.x += 0.005;
+    torusKnot.rotation.y += 0.005;
+    loadingSymbol.rotation.x += 0.08;
 };
 
 // scene renderer

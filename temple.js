@@ -59,10 +59,28 @@ templeWallB.position.set(40,0,-140);
 var templeParts = new THREE.Mesh; // adding all objects as one for efficiency
 templeParts.add(templeWallL, templeWallR, templeWallB, templeFloor, templeRoof);
 
-//Art/Statue base + light
+//Art/Statue bases + light
 var statueBaseG = new THREE.BoxGeometry(10,5,10);
 var statueBase = new THREE.Mesh(statueBaseG,m);
 
 var statueLight = new THREE.PointLight(0xff00ff,0.5,20,2);
 statueBase.add(statueLight);
 statueLight.position.set(0,10,0);
+
+//Artworks/Statues
+//Art 1 - Rotating Torus Knot
+var torusG = new THREE.TorusKnotGeometry(2,0.5,60,8,2,5);
+var torusM = new THREE.MeshPhongMaterial({color:0xffff00});
+var torusKnot = new THREE.Mesh(torusG,torusM);
+torusKnot.position.set(0,0,-25);
+//Art 2 - Loading symbol
+var loadingG = new THREE.RingGeometry(3,5,15,1,0,3.2);
+var loadingM = new THREE.MeshPhongMaterial({color:0x0000ff});
+var loadingSymbol = new THREE.Mesh(loadingG,loadingM);
+loadingSymbol.position.set(0,0,-50);
+loadingSymbol.rotation.y = Math.PI/2;
+//Art 3 - Changing text
+
+
+
+
