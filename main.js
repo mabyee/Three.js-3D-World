@@ -68,6 +68,7 @@ for(let i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
         pillarClone.position.set(i,0,0);
         scene.add(pillarClone);
 }
+//car
 
 //stairs
 for(let i = 0; i < 10; i+=2){
@@ -78,7 +79,7 @@ for(let i = 0; i < 10; i+=2){
 }
 //statue bases
 for(let i=0;i<125;i+=25){
-    for(let j=0;j<125;j+=25){
+    for(let j=0;j<150;j+=25){
         var statueBaseClone = statueBase.clone();
         statueBaseClone.position.set(80,-10,-25-j);
         scene.add(statueBaseClone);
@@ -87,10 +88,10 @@ for(let i=0;i<125;i+=25){
     scene.add(statueBaseClone);
 }
 //trees
-for(let i=0;i<350;i+=25){
+for(let i=0;i<900;i+=25){
     let j = Math.floor(Math.random() * 70); //place trees at random distances and height to eachother
     var treeClone = treeTrunk.clone();
-    treeClone.position.set(-125+j,-10-j/15,-150+i+j/5);
+    treeClone.position.set(-400+j*3,-10-j/15,-420+i+j/5);
     scene.add(treeClone);
 }
 //remaining temple objects
@@ -99,6 +100,7 @@ scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
 scene.add(treeTrunk);
+scene.add(car);
 
 // logic
 var update = function()

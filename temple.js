@@ -90,4 +90,41 @@ var treeTop = new THREE.Mesh(treeTopG,treeTopM);
 treeTop.rotation.x = Math.PI/2;
 treeTop.position.set(0,10,0);
 treeTrunk.add(treeTop);
+//Art 4 - Car
+var car = new THREE.Group;
+var carBodyG = new THREE.BoxGeometry(30,8,15);
+var carBodyM = new THREE.MeshPhongMaterial({color: 0x787878});
+var carBody = new THREE.Mesh(carBodyG,carBodyM);
+carBody.position.set(1,1,1);
+car.add(carBody);
+
+function createWheel(){ //function for creating as many wheels as I need
+    var wheelG = new THREE.CylinderGeometry(3,3,3,16);
+    var wheelM = new THREE.MeshPhongMaterial({color:0x333333});
+    var wheel = new THREE.Mesh(wheelG,wheelM);
+    wheel.rotation.x = Math.PI/2;
+    return wheel;
+}
+var wheelFR = createWheel();// creating instances of the wheel
+var wheelFL = createWheel();
+var wheelBR = createWheel();
+var wheelBL = createWheel();
+
+wheelFR.position.set(-9,-1,9);//positioning each wheel at a different point around the car
+car.add(wheelFR);
+wheelFL.position.set(-9,-1,-7);
+car.add(wheelFL);
+wheelBR.position.set(11,-1,9);
+car.add(wheelBR);
+wheelBL.position.set(11,-1,-7);
+car.add(wheelBL);
+
+var carTopG = new THREE.BoxGeometry(22,8,15);
+var carTopM = new THREE.MeshPhongMaterial({color: 0x787878});
+var carTop = new THREE.Mesh(carTopG,carTopM);
+carTop.position.set(5,9,1);
+car.add(carTop);
+
+//TODO: ADD WINDOWS, DOOR HANDELS, TAIL AND FRONT LIGHTS
+//Art 5 - Water
 
