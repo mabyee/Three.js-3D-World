@@ -66,13 +66,21 @@ var statueBaseM = new THREE.MeshPhongMaterial({color: 0x050505});
 var statueBase = new THREE.Mesh(statueBaseG,statueBaseM);
 statue.add(statueBase);
 
-var statueLight = new THREE.PointLight(0xff00ff,0.5,20,2);
-statueBase.add(statueLight);
-statueLight.position.set(0,10,0);
-statue.add(statueLight);
+var templeLightG = new THREE.BoxGeometry(2,2,2);
+var templeLightM = new THREE.MeshPhongMaterial({color: 0x505050});
+var templeLight = new THREE.Mesh(templeLightG,templeLightM);
+templeLight.position.set(0,21,0);
+
+var templeLightG2 = new THREE.BoxGeometry(1,1,1);
+var templeLightM2= new THREE.MeshPhongMaterial({color: 0xffffff, emissive: 0xffffff, transparent: true, opacity: 0.8});
+var templeLight2 = new THREE.Mesh(templeLightG2,templeLightM2);
+templeLight.add(templeLight2);
+templeLight2.position.set(0,-1,0);
+
+statue.add(templeLight);
 
 var baseCoverG = new THREE.BoxGeometry(10,15,10);
-var baseCoverM = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.3, emissive: 0x787878, shininess: 100});
+var baseCoverM = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.3, shininess: 100});
 var baseCover = new THREE.Mesh(baseCoverG,baseCoverM);
 baseCover.position.set(0,10,0);
 statue.add(baseCover);
@@ -94,13 +102,13 @@ var tree = new THREE.Group;
 var treeTrunkG = new THREE.CylinderGeometry(2,3,20,10,1);
 var treeTrunkM = new THREE.MeshPhongMaterial({color:0x964b00});
 var treeTrunk = new THREE.Mesh(treeTrunkG,treeTrunkM);
-treeTrunk.position.set(-30,0,0);
+treeTrunk.position.set(0,0,0);
 tree.add(treeTrunk);
 var treeTopG = new THREE.TorusKnotGeometry(5,5,170,6,14,16); //using torus knot geometry to make the tree top
 var treeTopM = new THREE.MeshPhongMaterial({color:0x618a3d});
 var treeTop = new THREE.Mesh(treeTopG,treeTopM);
 treeTop.rotation.x = Math.PI/2;
-treeTop.position.set(-30,10,0);
+treeTop.position.set(0,10,0);
 tree.add(treeTop);
 //Art 4 - Car
 var car = new THREE.Group;
@@ -157,7 +165,5 @@ car.add(carWindowB);
 //    var
 //}
 
-
 //TODO: ADD WINDOWS, DOOR HANDELS, TAIL AND FRONT LIGHTS
-//Art 5 - Water
 

@@ -4,8 +4,8 @@ var windowHeight = window.innerHeight;
 
 //setup
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, windowWidth / windowHeight, 0.1, 5000 )
-camera.position.set(1,10,70);
+var camera = new THREE.PerspectiveCamera(55, windowWidth / windowHeight, 0.1, 5000 )
+camera.position.set(0,0,14);
 
 // renderer setup
 var renderer = new THREE.WebGLRenderer();
@@ -94,20 +94,74 @@ for(let i=0;i<900;i+=25){
     treeClone.position.set(-400+j*3,-10-j/15,-420+i+j/5);
     scene.add(treeClone);
 }
+//miniCar
+var miniCar = car.clone();
+miniCar.scale.set(0.25,0.25,0.25);//using scale to make a smaller copy of the original car
+miniCar.position.set(80,-6.5,-25);
+//miniTree
+var miniTree = tree.clone();
+miniTree.scale.set(0.25,0.25,0.25);
+miniTree.position.set(80,-5,-50);
+
 //remaining temple objects
 scene.add(plane);
 scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
-car.position.set(20,20,20);
+car.position.set(20,-16,50);
 scene.add(car);
+scene.add(miniCar);
+scene.add(miniTree);
+scene.add(fountain);
 
+//Character controls setup
+//initiate keyboard
+var keyboard = {};
+function keyDown(event){
+    keyboard[event.keyCode] = true;
+}
+function keyUp(event){
+    keyboard[event.keyCode] = false;
+}
+window.addEventListener('keydown', keyDown);
+window.addEventListener('keyup', keyUp);
+
+
+var skyLightStatus = true;
 // logic
 var update = function()
 {
     torusKnot.rotation.x += 0.005;
     torusKnot.rotation.y += 0.005;
     loadingSymbol.rotation.x += 0.08;
+    document.onkeydown = function(lights) {
+        switch (lights.keyCode) {
+            case 84: //turn night on and off
+                if(skyLightStatus == true){
+                    scene.remove(skyLight);
+                    skyLightStatus = false;
+                }
+                else{
+                    scene.add(skyLight);
+                    skyLightStatus = true;
+                }
+                break;
+        }
+    };
+    if(keyboard[87]){ //W key - Forwards
+        camera.position.x -= Math.sin(camera.rotation.y)*1;
+        camera.position.z -= Math.cos(camera.rotation.y)*1;
+    }
+    if(keyboard[83]){//S Key - Backwards
+        camera.position.x += Math.sin(camera.rotation.y)*1;
+        camera.position.z += Math.cos(camera.rotation.y)*1;
+    }
+    if(keyboard[65]){//A Key - Turn left
+        camera.rotation.y += Math.PI/2 * 0.02;
+    }
+    if(keyboard[68]){//D Key - Turn right
+        camera.rotation.y -= Math.PI/2 * 0.02;
+    }
 };
 
 // scene renderer
