@@ -80,7 +80,7 @@ for(let i = 0; i < 10; i+=2){
 //statue bases
 for(let i=0;i<125;i+=25){
     for(let j=0;j<150;j+=25){
-        var statueBaseClone = statueBase.clone();
+        var statueBaseClone = statue.clone();
         statueBaseClone.position.set(80,-10,-25-j);
         scene.add(statueBaseClone);
     }
@@ -90,7 +90,7 @@ for(let i=0;i<125;i+=25){
 //trees
 for(let i=0;i<900;i+=25){
     let j = Math.floor(Math.random() * 70); //place trees at random distances and height to eachother
-    var treeClone = treeTrunk.clone();
+    var treeClone = tree.clone();
     treeClone.position.set(-400+j*3,-10-j/15,-420+i+j/5);
     scene.add(treeClone);
 }
@@ -99,7 +99,7 @@ scene.add(plane);
 scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
-scene.add(treeTrunk);
+car.position.set(20,20,20);
 scene.add(car);
 
 // logic

@@ -59,13 +59,23 @@ templeWallB.position.set(40,0,-140);
 var templeParts = new THREE.Mesh; // adding all objects as one for efficiency
 templeParts.add(templeWallL, templeWallR, templeWallB, templeFloor, templeRoof);
 
-//Art/Statue bases + light
+//Art/Statue bases + light + cover
+var statue = new THREE.Group();
 var statueBaseG = new THREE.BoxGeometry(10,5,10);
-var statueBase = new THREE.Mesh(statueBaseG,m);
+var statueBaseM = new THREE.MeshPhongMaterial({color: 0x050505});
+var statueBase = new THREE.Mesh(statueBaseG,statueBaseM);
+statue.add(statueBase);
 
 var statueLight = new THREE.PointLight(0xff00ff,0.5,20,2);
 statueBase.add(statueLight);
 statueLight.position.set(0,10,0);
+statue.add(statueLight);
+
+var baseCoverG = new THREE.BoxGeometry(10,15,10);
+var baseCoverM = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.3, emissive: 0x787878, shininess: 100});
+var baseCover = new THREE.Mesh(baseCoverG,baseCoverM);
+baseCover.position.set(0,10,0);
+statue.add(baseCover);
 
 //Artworks/Statues
 //Art 1 - Rotating Torus Knot
@@ -80,16 +90,18 @@ var loadingSymbol = new THREE.Mesh(loadingG,loadingM);
 loadingSymbol.position.set(0,0,-50);
 loadingSymbol.rotation.y = Math.PI/2;
 //Art 3 - Tree
+var tree = new THREE.Group;
 var treeTrunkG = new THREE.CylinderGeometry(2,3,20,10,1);
 var treeTrunkM = new THREE.MeshPhongMaterial({color:0x964b00});
 var treeTrunk = new THREE.Mesh(treeTrunkG,treeTrunkM);
-treeTrunk.position.set(-30,-10,0);
+treeTrunk.position.set(-30,0,0);
+tree.add(treeTrunk);
 var treeTopG = new THREE.TorusKnotGeometry(5,5,170,6,14,16); //using torus knot geometry to make the tree top
 var treeTopM = new THREE.MeshPhongMaterial({color:0x618a3d});
 var treeTop = new THREE.Mesh(treeTopG,treeTopM);
 treeTop.rotation.x = Math.PI/2;
-treeTop.position.set(0,10,0);
-treeTrunk.add(treeTop);
+treeTop.position.set(-30,10,0);
+tree.add(treeTop);
 //Art 4 - Car
 var car = new THREE.Group;
 var carBodyG = new THREE.BoxGeometry(30,8,15);
@@ -119,11 +131,32 @@ car.add(wheelBR);
 wheelBL.position.set(11,-1,-7);
 car.add(wheelBL);
 
-var carTopG = new THREE.BoxGeometry(22,8,15);
+var carTopG = new THREE.BoxGeometry(22,7,15);
 var carTopM = new THREE.MeshPhongMaterial({color: 0x787878});
 var carTop = new THREE.Mesh(carTopG,carTopM);
-carTop.position.set(5,9,1);
+carTop.position.set(5,8,1);
 car.add(carTop);
+
+function createWindow(){
+    var carWindowG = new THREE.BoxGeometry(9,5,15.1);
+    var carWindowM = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.4, shininess: 100, emissive: 0x787878});
+    var carWindow = new THREE.Mesh(carWindowG,carWindowM);
+    return carWindow;
+}
+var carWindowF = createWindow();
+var carWindowB = createWindow();
+var carWindowH = createWindow();
+
+carWindowF.position.set(0,8,1);
+car.add(carWindowF);
+carWindowB.position.set(10,8,1);
+car.add(carWindowB);
+
+//function createWindow(){
+ //   var carWindow2 = new THREE.BoxGeometry(9,5,15.1);
+//    var
+//}
+
 
 //TODO: ADD WINDOWS, DOOR HANDELS, TAIL AND FRONT LIGHTS
 //Art 5 - Water
