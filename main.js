@@ -160,6 +160,7 @@ var skyLightStatus = true;
 // logic
 var update = function()
 {
+    console.log("running");
     torusKnot.rotation.x += 0.005;
     torusKnot.rotation.y += 0.005;
     loadingSymbol.rotation.x += 0.08;

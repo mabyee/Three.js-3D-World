@@ -44,11 +44,14 @@ for(let i = 0;i<50;i+=16.67){
 var apartment = new THREE.Group();
 apartment.position.set(100,30,140);
 
-var apartmentBuildingG = new THREE.BoxGeometry(100,100,100);
-var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8});
-var apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
-apartment.add(apartmentBuilding);
+var apartmentTexture = new THREE.TextureLoader().load("images/apartmentTexture.png");
 
+var apartmentBuildingG = new THREE.BoxGeometry(100,100,100);
+var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8, map:apartmentTexture});
+var apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
+apartmentBuilding.receiveShadow = true;
+apartmentBuilding.castShadow = true;
+apartment.add(apartmentBuilding);
 
 //Lots area
 var lots = new THREE.Group();
