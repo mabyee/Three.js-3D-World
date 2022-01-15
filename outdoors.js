@@ -40,6 +40,13 @@ for(let i = 0;i<50;i+=16.67){
     roadMarkingClone.position.set(-21+i,0.51,0);
     roadPiece.add(roadMarkingClone);
 }
+//Trafficlight?
 
 
+//Parking lot
+var parkingLot = new THREE.Group();
+parkingLot.position.set(300,-20,-75);
 
+var parkingMainG = new THREE.BoxGeometry(150,1,250);
+var parkingMain = new THREE.Mesh(parkingMainG,roadM);
+parkingLot.add(parkingMain);

@@ -68,7 +68,14 @@ for(let i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
         pillarClone.position.set(i,0,0);
         scene.add(pillarClone);
 }
-//car
+//car + 2nd car
+car.position.set(20,-16,60);
+var car2 = car.clone();
+car2.position.set(20,-16,40);
+car2.rotation.y = Math.PI;
+var car3 = car.clone();
+car3.position.set(-90,-16,40);
+car3.rotation.y = Math.PI/2;
 
 //stairs
 for(let i = 0; i < 10; i+=2){
@@ -125,8 +132,9 @@ scene.add(plane);
 scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
-car.position.set(20,-16,50);
 scene.add(car);
+scene.add(car2);
+scene.add(car3);
 scene.add(miniCar);
 scene.add(miniTree);
 scene.add(fountain);
@@ -134,7 +142,7 @@ scene.add(road);
 scene.add(road2);
 scene.add(forest);
 scene.add(forest2);
-
+scene.add(parkingLot);
 
 //Character controls setup
 //initiate keyboard
@@ -184,6 +192,20 @@ var update = function()
     if(keyboard[68]){//D Key - Turn right
         camera.rotation.y -= Math.PI/2 * 0.02;
     }
+    //car movement
+    car.position.x -=0.5;
+    if(car.position.x < -450){
+        car.position.x = 450;
+    }
+    car2.position.x +=0.5;
+    if(car2.position.x > 450){
+        car2.position.x = -450;
+    }
+    car3.position.z +=0.5;
+    if(car3.position.z > 450){
+        car3.position.z = -450;
+    }
+
 };
 
 // scene renderer
