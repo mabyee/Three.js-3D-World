@@ -132,9 +132,7 @@ scene.add(plane);
 scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
-scene.add(car);
-scene.add(car2);
-scene.add(car3);
+scene.add(car,car2,car3);
 scene.add(miniCar);
 scene.add(miniTree);
 scene.add(fountain);
@@ -142,7 +140,8 @@ scene.add(road);
 scene.add(road2);
 scene.add(forest);
 scene.add(forest2);
-scene.add(parkingLot);
+scene.add(lots);
+scene.add(apartment);
 
 //Character controls setup
 //initiate keyboard

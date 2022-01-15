@@ -40,13 +40,26 @@ for(let i = 0;i<50;i+=16.67){
     roadMarkingClone.position.set(-21+i,0.51,0);
     roadPiece.add(roadMarkingClone);
 }
-//Trafficlight?
+//Apartment
+var apartment = new THREE.Group();
+apartment.position.set(100,30,140);
+
+var apartmentBuildingG = new THREE.BoxGeometry(100,100,100);
+var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8});
+var apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
+apartment.add(apartmentBuilding);
 
 
-//Parking lot
-var parkingLot = new THREE.Group();
-parkingLot.position.set(300,-20,-75);
+//Lots area
+var lots = new THREE.Group();
+lots.position.set(0,-20.1,0);
 
-var parkingMainG = new THREE.BoxGeometry(150,1,250);
-var parkingMain = new THREE.Mesh(parkingMainG,roadM);
-parkingLot.add(parkingMain);
+var lotM = new THREE.MeshPhongMaterial({color: 0x404040});
+var lot1G = new THREE.BoxGeometry(150,1,200);
+var lot1 = new THREE.Mesh(lot1G,lotM);
+lot1.position.set(40,0,-60);
+
+var lot2G = new THREE.BoxGeometry(150,1,150);
+var lot2 = new THREE.Mesh(lot2G,lotM);
+lot2.position.set(100,0,140);
+lots.add(lot1,lot2);
