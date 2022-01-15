@@ -88,12 +88,16 @@ for(let i=0;i<125;i+=25){
     scene.add(statueBaseClone);
 }
 //trees
-for(let i=0;i<900;i+=25){
+var forest = new THREE.Group();
+for(let i=0;i<450;i+=25){
     let j = Math.floor(Math.random() * 70); //place trees at random distances and height to eachother
     var treeClone = tree.clone();
-    treeClone.position.set(-400+j*3,-10-j/15,-420+i+j/5);
-    scene.add(treeClone);
+    treeClone.position.set(-350+j*3,-10-j/15,-420+i+j/5);
+    forest.add(treeClone);
 }
+var forest2 = forest.clone();
+forest2.position.set(0,0,488);
+
 //miniCar
 var miniCar = car.clone();
 miniCar.scale.set(0.25,0.25,0.25);//using scale to make a smaller copy of the original car
@@ -102,6 +106,19 @@ miniCar.position.set(80,-6.5,-25);
 var miniTree = tree.clone();
 miniTree.scale.set(0.25,0.25,0.25);
 miniTree.position.set(80,-5,-50);
+//adding road blocks together to make a longer road
+var road = new THREE.Group();
+road.position.set(-100,-20,475);//defining the starting point
+road.rotation.y = Math.PI/2;//rotating road
+var roadLength = 20;//define the length of the road here
+for(let i=0;i<roadLength;i++){
+    var roadPieceClone = roadPiece.clone();
+    roadPieceClone.position.set(0+i*50,0,0);
+    road.add(roadPieceClone);
+}
+var road2 = road.clone();//second road
+road2.position.set(525,-20,50);
+road2.rotation.y = Math.PI;
 
 //remaining temple objects
 scene.add(plane);
@@ -113,6 +130,11 @@ scene.add(car);
 scene.add(miniCar);
 scene.add(miniTree);
 scene.add(fountain);
+scene.add(road);
+scene.add(road2);
+scene.add(forest);
+scene.add(forest2);
+
 
 //Character controls setup
 //initiate keyboard

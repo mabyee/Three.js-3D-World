@@ -24,3 +24,22 @@ fountain.add(fountainWater);
     //Flowing Water?
 //River
 
+//Road
+var roadG = new THREE.BoxGeometry(50,1,40);
+var roadM = new THREE.MeshPhongMaterial({color: 0x000000});
+var roadPiece = new THREE.Mesh(roadG,roadM);
+
+var roadMarkingG = new THREE.PlaneGeometry(8,2);
+var roadMarkingM = new THREE.MeshPhongMaterial({color: 0xffffff});
+var roadMarking = new THREE.Mesh(roadMarkingG,roadMarkingM);
+roadMarking.position.set(0,0.51,0);
+roadMarking.rotation.x = -Math.PI/2;
+
+for(let i = 0;i<50;i+=16.67){
+    roadMarkingClone = roadMarking.clone();
+    roadMarkingClone.position.set(-21+i,0.51,0);
+    roadPiece.add(roadMarkingClone);
+}
+
+
+
