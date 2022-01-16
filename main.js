@@ -11,7 +11,8 @@ camera.position.set(0,0,14);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(windowWidth, windowHeight);
 document.body.appendChild(renderer.domElement);
-renderer.shadowMap.enable = true;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCSoftShadowMap;
 
 
 //adjust size on windows resize
@@ -33,7 +34,7 @@ scene.add(skyLight);
 
 //---PLANE---
 var planeG = new THREE.PlaneGeometry(1000,1000);
-var planeT = new THREE.MeshPhongMaterial({color: 0x00ff00});
+var planeT = new THREE.MeshPhongMaterial({color: 0x348c31});
 var plane = new THREE.Mesh(planeG,planeT);
 plane.position.set(50,-20,0);
 plane.rotation.x = -Math.PI/2;
@@ -62,12 +63,6 @@ for(let i=0;i<6;i++){
     scene.add(skybox);
 }
 
-//pillars
-for(let i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
-    var pillarClone = pillar.clone();
-        pillarClone.position.set(i,0,0);
-        scene.add(pillarClone);
-}
 //car + 2nd car
 car.position.set(20,-16,60);
 var car2 = car.clone();
@@ -77,23 +72,6 @@ var car3 = car.clone();
 car3.position.set(-90,-16,40);
 car3.rotation.y = Math.PI/2;
 
-//stairs
-for(let i = 0; i < 10; i+=2){
-    var templeStairClone = templeStair.clone();
-        templeStairClone.position.set(40,-12-i,i);
-        templeStairClone.scale.set(1+i/50,1,1);
-        scene.add(templeStairClone);
-}
-//statue bases
-for(let i=0;i<125;i+=25){
-    for(let j=0;j<150;j+=25){
-        var statueBaseClone = statue.clone();
-        statueBaseClone.position.set(80,-10,-25-j);
-        scene.add(statueBaseClone);
-    }
-    statueBaseClone.position.set(0,-10,-25-i);
-    scene.add(statueBaseClone);
-}
 //trees
 var forest = new THREE.Group();
 for(let i=0;i<450;i+=25){
@@ -106,7 +84,6 @@ var forest2 = forest.clone();
 forest2.position.set(0,0,488);
 
 //miniCar
-var miniCar = car.clone();
 miniCar.scale.set(0.25,0.25,0.25);//using scale to make a smaller copy of the original car
 miniCar.position.set(80,-6.5,-25);
 //miniTree
@@ -126,22 +103,21 @@ for(let i=0;i<roadLength;i++){
 var road2 = road.clone();//second road
 road2.position.set(525,-20,50);
 road2.rotation.y = Math.PI;
+road.receiveShadow = true;
+road2.receiveShadow = true;
 
 //remaining temple objects
 scene.add(plane);
-scene.add(templeParts);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
 scene.add(car,car2,car3);
-scene.add(miniCar);
-scene.add(miniTree);
+scene.add(miniCar, miniTree);
 scene.add(fountain);
-scene.add(road);
-scene.add(road2);
-scene.add(forest);
-scene.add(forest2);
+scene.add(road, road2);
+scene.add(forest, forest2);
 scene.add(lots);
 scene.add(apartment);
+scene.add(temple);
 
 //Character controls setup
 //initiate keyboard

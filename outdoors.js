@@ -66,3 +66,4 @@ var lot2G = new THREE.BoxGeometry(150,1,150);
 var lot2 = new THREE.Mesh(lot2G,lotM);
 lot2.position.set(100,0,140);
 lots.add(lot1,lot2);
+lots.receiveShadow = true;
