@@ -4,7 +4,7 @@ var windowHeight = window.innerHeight;
 
 //setup
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(55, windowWidth / windowHeight, 0.1, 5000 )
+var camera = new THREE.PerspectiveCamera(55, windowWidth / windowHeight, 0.1, 3000 )
 camera.position.set(0,0,14);
 
 // renderer setup
@@ -12,7 +12,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(windowWidth, windowHeight);
 document.body.appendChild(renderer.domElement);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCSoftShadowMap;
+renderer.shadowMap.type = THREE.BasicShadowMap;//best performance shadow map
 
 
 //adjust size on windows resize
@@ -66,7 +66,7 @@ var skyBox = new THREE.Group();
 
 for(let i=0;i<6;i++){
     skyArray[i].side = THREE.BackSide;
-    let skyboxG = new THREE.BoxGeometry(4000,4000,4000);
+    let skyboxG = new THREE.BoxBufferGeometry(2000,2000,2000);
     let skybox = new THREE.Mesh(skyboxG, skyArray);
     skyBox.add(skybox);
 }

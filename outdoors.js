@@ -25,7 +25,7 @@ fountain.add(fountainWater);
 //River
 
 //Road
-var roadG = new THREE.BoxGeometry(50,1,40);
+var roadG = new THREE.BoxBufferGeometry(50,1,40);
 var roadM = new THREE.MeshPhongMaterial({color: 0x000000});
 var roadPiece = new THREE.Mesh(roadG,roadM);
 
@@ -46,7 +46,7 @@ apartment.position.set(100,30,140);
 
 //var apartmentTexture = new THREE.TextureLoader().load("images/apartments2.png");
 
-var apartmentBuildingG = new THREE.BoxGeometry(100,100,100);
+var apartmentBuildingG = new THREE.BoxBufferGeometry(100,100,100);
 var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8, //map:apartmentTexture
 });
 var apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
@@ -59,12 +59,12 @@ var lots = new THREE.Group();
 lots.position.set(0,-20.1,0);
 
 var lotM = new THREE.MeshPhongMaterial({color: 0x404040});
-var lot1G = new THREE.BoxGeometry(150,1,200);
+var lot1G = new THREE.BoxBufferGeometry(150,1,200);
 var lot1 = new THREE.Mesh(lot1G,lotM);
 lot1.receiveShadow = true;
 lot1.position.set(40,0,-60);
 
-var lot2G = new THREE.BoxGeometry(150,1,150);
+var lot2G = new THREE.BoxBufferGeometry(150,1,150);
 var lot2 = new THREE.Mesh(lot2G,lotM);
 lot2.position.set(100,0,140);
 lot2.receiveShadow = true;

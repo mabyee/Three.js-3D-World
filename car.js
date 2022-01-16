@@ -1,6 +1,6 @@
 // Car
 var car = new THREE.Group;
-var carBodyG = new THREE.BoxGeometry(30,8,15);
+var carBodyG = new THREE.BoxBufferGeometry(30,8,15);
 var carBodyM = new THREE.MeshPhongMaterial({color: 0x787878});
 var carBody = new THREE.Mesh(carBodyG,carBodyM);
 carBody.receiveShadow = true;
@@ -31,7 +31,7 @@ car.add(wheelBR);
 wheelBL.position.set(11,-1,-7);
 car.add(wheelBL);
 
-var carTopG = new THREE.BoxGeometry(22,7,15);
+var carTopG = new THREE.BoxBufferGeometry(22,7,15);
 var carTopM = new THREE.MeshPhongMaterial({color: 0x787878});
 var carTop = new THREE.Mesh(carTopG,carTopM);
 carTop.receiveShadow = true;
@@ -40,7 +40,7 @@ carTop.position.set(5,8,1);
 car.add(carTop);
 //car windows
 function createWindow(){
-    let carWindowG = new THREE.BoxGeometry(9,5,15.1);
+    let carWindowG = new THREE.BoxBufferGeometry(9,5,15.1);
     let carWindowM = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.4, shininess: 100, emissive: 0x787878});
     let carWindow = new THREE.Mesh(carWindowG,carWindowM);
     return carWindow;
@@ -53,7 +53,7 @@ car.add(carWindowF);
 carWindowB.position.set(10,8,1);
 car.add(carWindowB);
 
-var carWindow2G = new THREE.BoxGeometry(22.1,5,12);
+var carWindow2G = new THREE.BoxBufferGeometry(22.1,5,12);
 var carWindow2M = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.4, shininess: 100, emissive: 0x787878});
 var carWindowFront = new THREE.Mesh(carWindow2G,carWindow2M);
 
@@ -61,7 +61,7 @@ car.add(carWindowFront);
 carWindowFront.position.set(5,8,1);
 //car door handels
 function createDoorHandels(){
-    let doorHandleG = new THREE.BoxGeometry(2,0.7,16);
+    let doorHandleG = new THREE.BoxBufferGeometry(2,0.7,16);
     let doorHandleM = new THREE.MeshPhongMaterial({color: 0x0f0f0f});
     let doorHandle = new THREE.Mesh(doorHandleG,doorHandleM);
     doorHandle.receiveShadow = true;
@@ -75,7 +75,7 @@ car.add(doorHandleF, doorHandleB);
 doorHandleF.position.set(2,4,1);
 doorHandleB.position.set(12,4,1);
 //car light bars
-var lightBarG = new THREE.BoxGeometry(1,1,14);
+var lightBarG = new THREE.BoxBufferGeometry(1,1,14);
 var lightBarBM = new THREE.MeshPhongMaterial({color: 0xff160c, emissive: 0xff160c});
 var lightBarFM = new THREE.MeshPhongMaterial({color: 0xadd8e6, emissive: 0xadd8e6});
 
