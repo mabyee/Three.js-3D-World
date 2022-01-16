@@ -113,7 +113,7 @@ road2.rotation.y = Math.PI;
 road.receiveShadow = true;
 road2.receiveShadow = true;
 
-//remaining temple objects
+//adding objects to scene
 scene.add(plane);
 scene.add(torusKnot);
 scene.add(loadingSymbol);

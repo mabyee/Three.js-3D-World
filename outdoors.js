@@ -44,7 +44,7 @@ for(let i = 0;i<50;i+=16.67){
 var apartment = new THREE.Group();
 apartment.position.set(100,30,140);
 
-var apartmentTexture = new THREE.TextureLoader().load("images/apartmentTexture.png");
+var apartmentTexture = new THREE.TextureLoader().load("images/apartments2.png");
 
 var apartmentBuildingG = new THREE.BoxGeometry(100,100,100);
 var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8, map:apartmentTexture});
@@ -53,7 +53,7 @@ apartmentBuilding.receiveShadow = true;
 apartmentBuilding.castShadow = true;
 apartment.add(apartmentBuilding);
 
-//Lots area
+//Lots
 var lots = new THREE.Group();
 lots.position.set(0,-20.1,0);
 
@@ -107,28 +107,18 @@ roadLightLantern.position.set(8,4,0);
 lanternLight.position.set(8,3,0);
     //placing lights around the map
 var placedRoadLights = new THREE.Group();
-        //1
-var roadLight1 = roadLights.clone();
-placedRoadLights.add(roadLight1);
-roadLight1.position.set(-25,0,18);
-roadLight1.rotation.y = -Math.PI/2;
-        //2
-var roadLight2 = roadLights.clone();
-placedRoadLights.add(roadLight2);
-roadLight2.position.set(105,0,18);
-roadLight2.rotation.y = -Math.PI/2;
-        //3
-var roadLight3 = roadLights.clone();
-placedRoadLights.add(roadLight3);
-roadLight3.position.set(-200,0,18);
-roadLight3.rotation.y = -Math.PI/2;
-        //4
-var roadLight4 = roadLights.clone();
-placedRoadLights.add(roadLight4);
-roadLight4.position.set(160,0,80);
-roadLight4.rotation.y = Math.PI/2;
-        //5
-var roadLight5 = roadLights.clone();
-placedRoadLights.add(roadLight5);
-roadLight5.position.set(40,0,80);
-roadLight5.rotation.y = Math.PI/2;
+function createLampPost(x,z,rot){ //function to reduce steps for making each lamp post
+    let roadLight = roadLights.clone();
+    roadLight.position.set(x,0,z);
+    roadLight.rotation.y = rot;
+    return roadLight;
+}
+placedRoadLights.add(createLampPost(-70,0,Math.PI));//using function
+placedRoadLights.add(createLampPost(-25,18,-Math.PI/2));
+placedRoadLights.add(createLampPost(105,18,-Math.PI/2));
+placedRoadLights.add(createLampPost(-200,18,-Math.PI/2));
+placedRoadLights.add(createLampPost(160,80,Math.PI/2));
+placedRoadLights.add(createLampPost(40,80,Math.PI/2));
+placedRoadLights.add(createLampPost(300,18,-Math.PI/2));
+placedRoadLights.add(createLampPost(-380,18,-Math.PI/2));
+placedRoadLights.add(createLampPost(450,18,-Math.PI/2));
