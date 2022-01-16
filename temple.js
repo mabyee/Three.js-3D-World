@@ -112,12 +112,6 @@ var templeLightM2= new THREE.MeshPhongMaterial({color: 0xffffff, emissive: 0xfff
 var templeLight2 = new THREE.Mesh(templeLightG2,templeLightM2);
 templeLight.add(templeLight2);
 templeLight2.position.set(0,-1,0);
-
-let templePointLight = new THREE.PointLight(0xffffa0,0.5,30);
-templePointLight.castShadow = true;
-templePointLight.position.set(0,9,-25);
-temple.add(templePointLight); // TODO: Make an array and lots of lights. FOR LOOP + ADD DOES NOT WORK
-
 statue.add(templeLight);
 
 var baseCoverG = new THREE.BoxGeometry(10,15,10);

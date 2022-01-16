@@ -29,8 +29,15 @@ window.addEventListener('resize',function()
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // lighting
-var skyLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.9);
-scene.add(skyLight);
+var mainLights = new THREE.Group();
+var skyLight = new THREE.PointLight(0xffffbb, 1,1000);
+skyLight.position.set(300,300,-300);
+skyLight.castShadow = true;
+mainLights.add(skyLight);
+
+var hemisphere = new THREE.HemisphereLight(0xffffbb,0x080820,0.3);
+mainLights.add(hemisphere);
+
 
 //---PLANE---
 var planeG = new THREE.PlaneGeometry(1000,1000);
@@ -118,6 +125,8 @@ scene.add(forest, forest2);
 scene.add(lots);
 scene.add(apartment);
 scene.add(temple);
+scene.add(mainLights);
+scene.add(placedRoadLights);
 
 //Character controls setup
 //initiate keyboard
@@ -144,11 +153,11 @@ var update = function()
         switch (lights.keyCode) {
             case 84: //turn night on and off
                 if(skyLightStatus == true){
-                    scene.remove(skyLight);
+                    scene.remove(mainLights);
                     skyLightStatus = false;
                 }
                 else{
-                    scene.add(skyLight);
+                    scene.add(mainLights);
                     skyLightStatus = true;
                 }
                 break;
