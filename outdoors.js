@@ -44,10 +44,11 @@ for(let i = 0;i<50;i+=16.67){
 var apartment = new THREE.Group();
 apartment.position.set(100,30,140);
 
-var apartmentTexture = new THREE.TextureLoader().load("images/apartments2.png");
+//var apartmentTexture = new THREE.TextureLoader().load("images/apartments2.png");
 
 var apartmentBuildingG = new THREE.BoxGeometry(100,100,100);
-var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8, map:apartmentTexture});
+var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8, //map:apartmentTexture
+});
 var apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
 apartmentBuilding.receiveShadow = true;
 apartmentBuilding.castShadow = true;
@@ -96,7 +97,7 @@ var roadLightLanternG = new THREE.CylinderGeometry(1,3,3,16);
 var roadLightLanternM = new THREE.MeshPhongMaterial({color: 0xf8e1bb, emissive: 0xffffff, transparent: true, opacity: 0.8});
 var roadLightLantern = new THREE.Mesh(roadLightLanternG,roadLightLanternM);
 roadLights.add(roadLightLantern);
-var lanternLight = new THREE.PointLight(0xf8e1bb, 0.8, 70);
+var lanternLight = new THREE.PointLight(0xf8e1bb, 0.8, 60);
 roadLightLantern.add(lanternLight);
 lanternLight.castShadow = true;
     //part placements
@@ -120,5 +121,3 @@ placedRoadLights.add(createLampPost(-200,18,-Math.PI/2));
 placedRoadLights.add(createLampPost(160,80,Math.PI/2));
 placedRoadLights.add(createLampPost(40,80,Math.PI/2));
 placedRoadLights.add(createLampPost(300,18,-Math.PI/2));
-placedRoadLights.add(createLampPost(-380,18,-Math.PI/2));
-placedRoadLights.add(createLampPost(450,18,-Math.PI/2));

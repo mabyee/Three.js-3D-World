@@ -47,12 +47,12 @@ plane.position.set(50,-20,0);
 plane.rotation.x = -Math.PI/2;
 plane.receiveShadow = true;
 
-//SkyBox TODO: Add night box and trigger on button press (night/day)
+//SkyBox
 let skyArray = [];
 let ft = new THREE.TextureLoader().load("images/bluecloud_ft.jpg");
 let bk = new THREE.TextureLoader().load("images/bluecloud_bk.jpg");
 let up = new THREE.TextureLoader().load("images/bluecloud_up.jpg");
-let dn = new THREE.TextureLoader().load("images/bluecloud_dn.jpg");
+let dn = null;//unnecessary to load as not visible
 let rt = new THREE.TextureLoader().load("images/bluecloud_rt.jpg");
 let lf = new THREE.TextureLoader().load("images/bluecloud_lf.jpg");
 
@@ -62,13 +62,15 @@ skyArray.push(new THREE.MeshBasicMaterial( { map: up }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: dn }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: rt }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: lf }));
+var skyBox = new THREE.Group();
 
 for(let i=0;i<6;i++){
     skyArray[i].side = THREE.BackSide;
     let skyboxG = new THREE.BoxGeometry(4000,4000,4000);
     let skybox = new THREE.Mesh(skyboxG, skyArray);
-    scene.add(skybox);
+    skyBox.add(skybox);
 }
+scene.add(skyBox);
 
 //car + 2nd car
 car.position.set(20,-16,60);
@@ -145,7 +147,6 @@ var skyLightStatus = true;
 // logic
 var update = function()
 {
-    console.log("running");
     torusKnot.rotation.x += 0.005;
     torusKnot.rotation.y += 0.005;
     loadingSymbol.rotation.x += 0.08;
@@ -154,9 +155,11 @@ var update = function()
             case 84: //turn night on and off
                 if(skyLightStatus == true){
                     scene.remove(mainLights);
+                    scene.remove(skyBox);
                     skyLightStatus = false;
                 }
                 else{
+                    scene.add(skyBox);
                     scene.add(mainLights);
                     skyLightStatus = true;
                 }

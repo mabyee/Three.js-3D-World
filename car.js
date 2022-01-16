@@ -87,7 +87,7 @@ lightBarF.position.set(-14,4,1);
 //making mini copy
 var miniCar = car.clone();
 //adding lights to the car
-var lightBarLightF = new THREE.PointLight(0xadd8e6,0.8,200);
+var lightBarLightF = new THREE.PointLight(0xadd8e6,0.8,150);
 lightBarLightF.castShadow = true;
 
 car.add(lightBarLightF);
