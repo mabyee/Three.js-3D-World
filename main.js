@@ -14,7 +14,6 @@ document.body.appendChild(renderer.domElement);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.BasicShadowMap;//best performance shadow map
 
-
 //adjust size on windows resize
 window.addEventListener('resize',function()
 {
@@ -38,7 +37,6 @@ mainLights.add(skyLight);
 var hemisphere = new THREE.HemisphereLight(0xffffbb,0x080820,0.3);
 mainLights.add(hemisphere);
 
-
 //---PLANE---
 var planeG = new THREE.PlaneGeometry(1000,1000,50,50);
 var planeT = new THREE.MeshPhongMaterial({color: 0x348c31});
@@ -54,9 +52,7 @@ for (let i = 0;i<900;i+=51){//raising land inside of river area, hill-like
         planeG.attributes.position.setZ(37+i+j,30);
     }
 }
-//for (let i = 0;i<16;i++){
-//    planeG.attributes.position.setZ(904+i,30);
-//}
+
 planeG.attributes.position.needsUpdate = true;
 var plane = new THREE.Mesh(planeG,planeT);
 plane.position.set(50,-20,0);
@@ -118,13 +114,7 @@ for(let i=0;i<450;i+=25){
 var forest2 = forest.clone();
 forest2.position.set(0,0,488);
 
-//miniCar
-miniCar.scale.set(0.25,0.25,0.25);//using scale to make a smaller copy of the original car
-miniCar.position.set(80,-6.5,-25);
-//miniTree
-var miniTree = tree.clone();
-miniTree.scale.set(0.25,0.25,0.25);
-miniTree.position.set(80,-5,-50);
+
 //adding road blocks together to make a longer road
 var road = new THREE.Group();
 road.position.set(-100,-20,475);//defining the starting point
@@ -214,6 +204,8 @@ var update = function()
     if(car3.position.z > 450){
         car3.position.z = -450;
     }
+    //testing
+
 };
 
 // scene renderer
