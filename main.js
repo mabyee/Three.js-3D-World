@@ -40,12 +40,38 @@ mainLights.add(hemisphere);
 
 
 //---PLANE---
-var planeG = new THREE.PlaneGeometry(1000,1000);
+var planeG = new THREE.PlaneGeometry(1000,1000,50,50);
 var planeT = new THREE.MeshPhongMaterial({color: 0x348c31});
+for (let i = 0;i<1000;i+=51){//loop to deform plane for a river
+    planeG.attributes.position.setZ(35+i,-20);
+}
+for (let i = 0;i<16;i++){
+    planeG.attributes.position.setZ(1004+i,-20);
+}
+for (let i = 0;i<900;i+=51){//raising land inside of river area, hill-like
+    planeG.attributes.position.setZ(37+i,30);
+    for (let j= 0;j<14;j++){
+        planeG.attributes.position.setZ(37+i+j,30);
+    }
+}
+//for (let i = 0;i<16;i++){
+//    planeG.attributes.position.setZ(904+i,30);
+//}
+planeG.attributes.position.needsUpdate = true;
 var plane = new THREE.Mesh(planeG,planeT);
 plane.position.set(50,-20,0);
 plane.rotation.x = -Math.PI/2;
 plane.receiveShadow = true;
+//River
+var riverPlaneG = new THREE.PlaneBufferGeometry(400,400,20,20);
+for (let i = 0;i<400;i++){//loop to deform river plane randomly to mimick water behaviour
+    let j = Math.floor(Math.random() * 2);
+    riverPlaneG.attributes.position.setZ(i,-j);
+}
+var riverPlane = new THREE.Mesh(riverPlaneG,fountainWaterM);
+riverPlane.rotation.x = -Math.PI/2;
+scene.add(riverPlane);
+riverPlane.position.set(350,-21,-300);
 
 //SkyBox
 let skyArray = [];
@@ -74,9 +100,9 @@ scene.add(skyBox);
 
 //car + 2nd car
 car.position.set(20,-16,60);
-var car2 = car.clone();
-car2.position.set(20,-16,40);
-car2.rotation.y = Math.PI;
+//var car2 = car.clone();
+//car2.position.set(20,-16,40);
+//car2.rotation.y = Math.PI;
 var car3 = car.clone();
 car3.position.set(-90,-16,40);
 car3.rotation.y = Math.PI/2;
@@ -119,7 +145,7 @@ road2.receiveShadow = true;
 scene.add(plane);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
-scene.add(car,car2,car3);
+scene.add(car,car3);
 scene.add(miniCar, miniTree);
 scene.add(fountain);
 scene.add(road, road2);
@@ -141,7 +167,6 @@ function keyUp(event){
 }
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
-
 
 var skyLightStatus = true;
 // logic
@@ -185,15 +210,10 @@ var update = function()
     if(car.position.x < -450){
         car.position.x = 450;
     }
-    car2.position.x +=0.5;
-    if(car2.position.x > 450){
-        car2.position.x = -450;
-    }
     car3.position.z +=0.5;
     if(car3.position.z > 450){
         car3.position.z = -450;
     }
-
 };
 
 // scene renderer

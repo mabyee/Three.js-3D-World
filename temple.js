@@ -156,7 +156,6 @@ var treeTopG = new THREE.TorusKnotGeometry(5,5,170,6,14,16); //using torus knot 
 var treeTopM = new THREE.MeshPhongMaterial({color:0x618a3d});
 var treeTop = new THREE.Mesh(treeTopG,treeTopM);
 treeTop.castShadow = true;
-treeTop.receiveShadow = true;
 treeTop.rotation.x = Math.PI/2;
 treeTop.position.set(0,10,0);
 tree.add(treeTop);
