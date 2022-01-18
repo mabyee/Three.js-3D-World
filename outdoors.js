@@ -120,3 +120,21 @@ placedRoadLights.add(createLampPost(-200,18,-Math.PI/2));
 //placedRoadLights.add(createLampPost(160,80,Math.PI/2));
 placedRoadLights.add(createLampPost(40,80,Math.PI/2));
 placedRoadLights.add(createLampPost(250,18,-Math.PI/2));
+
+var advertSign = new THREE.Group();
+var advertSignTexture = new THREE.TextureLoader().load("images/welcomeText.png");
+advertSign.position.set(400,25,-170);
+var advertG = new THREE.BoxBufferGeometry(40,20,1);
+var advertM = new THREE.MeshLambertMaterial({map:advertSignTexture});
+var advert = new THREE.Mesh(advertG,advertM);
+
+function createPole(x){
+    let advertPoleG = new THREE.CylinderBufferGeometry(0.5,0.5,20,8);
+    let advertPoleM = new THREE.MeshPhongMaterial({color: 0x040404});
+    let advertPole = new THREE.Mesh(advertPoleG,advertPoleM);
+    advertPole.position.set(x,-10,-1);
+    return advertPole;
+}
+advertSign.add(advert);
+advertSign.add(createPole(-10));
+advertSign.add(createPole(10));

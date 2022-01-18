@@ -96,5 +96,3 @@ var lightBarLightB = new THREE.PointLight(0xff160c,0.5,50);
 lightBarLightB.castShadow = true;
 car.add(lightBarLightB);
 lightBarLightB.position.set(16.1,5,1);
-
-allLights.add(lightBarLightB,lightBarLightF);

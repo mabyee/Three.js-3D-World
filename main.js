@@ -96,9 +96,6 @@ scene.add(skyBox);
 
 //car + 2nd car
 car.position.set(20,-16,60);
-//var car2 = car.clone();
-//car2.position.set(20,-16,40);
-//car2.rotation.y = Math.PI;
 var car3 = car.clone();
 car3.position.set(-90,-16,40);
 car3.rotation.y = Math.PI/2;
@@ -145,6 +142,7 @@ scene.add(apartment);
 scene.add(temple);
 scene.add(mainLights);
 scene.add(placedRoadLights);
+scene.add(advertSign);
 
 //Character controls setup
 //initiate keyboard

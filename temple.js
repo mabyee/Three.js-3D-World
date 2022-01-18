@@ -1,19 +1,18 @@
 //Temple Model
 //pillars
-var pillar = null;
 var pillarG = new THREE.BoxBufferGeometry(5, 20, 5, 10, 10, 10);
-var pillarM = new THREE.MeshPhongMaterial({color: 0xbababa,shininess: 20});
-pillar = new THREE.Mesh(pillarG, pillarM);
+var pillarM = new THREE.MeshPhongMaterial({color: 0xbababa});
+var pillar = new THREE.Mesh(pillarG, pillarM);
 twisting(pillarG, 18);
 pillar = new THREE.Mesh(pillarG, pillarM);
 function twisting(geometry, degree) { //twisting the pillars
-    var quaternion = new THREE.Quaternion();
-    var positionAttribute = geometry.getAttribute('position');
-    var vertex = new THREE.Vector3();
+    let quaternion = new THREE.Quaternion();
+    let positionAttribute = geometry.getAttribute('position');
+    let vertex = new THREE.Vector3();
     for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++ ) {
     vertex.fromBufferAttribute( positionAttribute, vertexIndex );
-    var yPos = vertex.y;
-    var upVec = new THREE.Vector3(0, 1, 0);
+    let yPos = vertex.y;
+    let upVec = new THREE.Vector3(0, 1, 0);
     quaternion.setFromAxisAngle(upVec, (Math.PI/180)*degree*yPos);
     vertex.applyQuaternion(quaternion);
     geometry.attributes.position.setXYZ( vertexIndex, vertex.x, vertex.y, vertex.z ); //adjusting vertex positions
@@ -123,6 +122,13 @@ for(let i=0;i<125;i+=25){
     statueBaseClone.castShadow = true;
     temple.add(statueBaseClone);
 }
+//TODO: Tables in Temple
+var tableG = new THREE.CylinderGeometry(6, 2, 10, 16,10);
+var tableM = new THREE.MeshPhongMaterial({color: 0xc32a2a});
+var table = new THREE.Mesh(tableG, tableM);
+table.position.set(20,0,0);
+temple.add(table);
+
 //Tree
 var tree = new THREE.Group;
 var treeTrunkG = new THREE.CylinderGeometry(2,3,20,10,1);
