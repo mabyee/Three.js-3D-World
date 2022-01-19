@@ -41,34 +41,32 @@ for(let i = 0;i<50;i+=16.67){
 }
 //Apartment
 var apartment = new THREE.Group();
-apartment.position.set(100,30,140);
+apartment.position.set(0,-20,0);
+function createApartmentBuilding(SizeX,SizeY,SizeZ,colourHEX,PosX,PosZ){ //modular apartments function
+    let apartmentBuildingG = new THREE.BoxBufferGeometry(SizeX,SizeY,SizeZ);
+    let apartmentBuildingM = new THREE.MeshPhongMaterial({color: colourHEX});
+    let apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
+    apartmentBuilding.receiveShadow = true;
+    apartmentBuilding.castShadow = true;
+    apartmentBuilding.position.set(PosX,(SizeY/2),PosZ);
+    let lotG = new THREE.BoxBufferGeometry(SizeX+20,1,SizeZ+20);//adding the lot just around the building
+    let lotM = new THREE.MeshPhongMaterial({color: 0x404040});
+    let lot = new THREE.Mesh(lotG,lotM);
+    apartmentBuilding.add(lot);
+    lot.position.set(0,-(SizeY/2),0);//making sure the lot starts at the bottom of the building
+    return apartmentBuilding;
+}
+apartment.add(createApartmentBuilding(100,100,100,0xf88f8f,350,130));
+apartment.add(createApartmentBuilding(125,80,80,0xf88f8f,150,120));
+apartment.add(createApartmentBuilding(80,150,80,0xf88f8f,-30,200));
+apartment.add(createApartmentBuilding(50,200,50,0xf88f8f,-45,350));
 
-//var apartmentTexture = new THREE.TextureLoader().load("images/apartments2.png");
-
-var apartmentBuildingG = new THREE.BoxBufferGeometry(100,100,100);
-var apartmentBuildingM = new THREE.MeshPhongMaterial({color: 0xf8f8f8, //map:apartmentTexture
-});
-var apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
-apartmentBuilding.receiveShadow = true;
-apartmentBuilding.castShadow = true;
-apartment.add(apartmentBuilding);
-
-//Lots
-var lots = new THREE.Group();
-lots.position.set(0,-20.1,0);
-
-var lotM = new THREE.MeshPhongMaterial({color: 0x404040});
-var lot1G = new THREE.BoxBufferGeometry(150,1,200);
-var lot1 = new THREE.Mesh(lot1G,lotM);
-lot1.receiveShadow = true;
-lot1.position.set(40,0,-60);
-
-var lot2G = new THREE.BoxBufferGeometry(150,1,150);
-var lot2 = new THREE.Mesh(lot2G,lotM);
-lot2.position.set(100,0,140);
-lot2.receiveShadow = true;
-lots.add(lot1,lot2);
-lots.receiveShadow = true;
+//temple lot
+var templeLotM = new THREE.MeshPhongMaterial({color: 0x404040});
+var templeLotG = new THREE.BoxBufferGeometry(150,1,200);
+var templeLot = new THREE.Mesh(templeLotG,templeLotM);
+templeLot.receiveShadow = true;
+templeLot.position.set(40,-20.1,-60);
 
 //road lights
 var roadLights = new THREE.Group();

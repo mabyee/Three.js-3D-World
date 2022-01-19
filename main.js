@@ -137,7 +137,7 @@ scene.add(miniCar, miniTree);
 scene.add(fountain);
 scene.add(road, road2);
 scene.add(forest, forest2);
-scene.add(lots);
+scene.add(templeLot);
 scene.add(apartment);
 scene.add(temple);
 scene.add(mainLights);

@@ -10,12 +10,12 @@ function twisting(geometry, degree) { //twisting the pillars
     let positionAttribute = geometry.getAttribute('position');
     let vertex = new THREE.Vector3();
     for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++ ) {
-    vertex.fromBufferAttribute( positionAttribute, vertexIndex );
-    let yPos = vertex.y;
-    let upVec = new THREE.Vector3(0, 1, 0);
-    quaternion.setFromAxisAngle(upVec, (Math.PI/180)*degree*yPos);
-    vertex.applyQuaternion(quaternion);
-    geometry.attributes.position.setXYZ( vertexIndex, vertex.x, vertex.y, vertex.z ); //adjusting vertex positions
+        vertex.fromBufferAttribute( positionAttribute, vertexIndex );
+        let yPos = vertex.y;
+        let upVec = new THREE.Vector3(0, 1, 0);
+        quaternion.setFromAxisAngle(upVec, (Math.PI/180)*degree*yPos);
+        vertex.applyQuaternion(quaternion);
+        geometry.attributes.position.setXYZ( vertexIndex, vertex.x, vertex.y, vertex.z ); //adjusting vertex positions
     }
     geometry.attributes.position.needsUpdate = true;
     geometry.computeVertexNormals(); //updating the vertex positions
