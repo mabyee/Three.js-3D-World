@@ -1,5 +1,3 @@
-//Road
-
 //Fountain
 var fountain = new THREE.Group();
 //Fountain Structure
@@ -14,15 +12,11 @@ fountainBottom.position.set(0,-2,0);
 fountain.add(fountainBottom);
 fountain.add(fountainBase);
 fountain.position.set(150,-18,0);
-
-    //Spout
-    //Base Water
+//Base Water
 var fountainWaterG = new THREE.CylinderBufferGeometry(19.9,19.9,3,32,32);
 var fountainWaterM = new THREE.MeshPhongMaterial({color: 0x0000ff, transparent: true, opacity: 0.5});
 var fountainWater = new THREE.Mesh(fountainWaterG,fountainWaterM);
 fountain.add(fountainWater);
-    //Flowing Water?
-
 //Road
 var roadG = new THREE.BoxBufferGeometry(50,1,40);
 var roadM = new THREE.MeshPhongMaterial({color: 0x000000});
@@ -48,7 +42,7 @@ function createApartmentBuilding(SizeX,SizeY,SizeZ,colourHEX,PosX,PosZ){ //modul
     let apartmentBuilding = new THREE.Mesh(apartmentBuildingG,apartmentBuildingM);
     apartmentBuilding.receiveShadow = true;
     apartmentBuilding.castShadow = true;
-    apartmentBuilding.position.set(PosX,(SizeY/2),PosZ);
+    apartmentBuilding.position.set(PosX,(SizeY/2),PosZ);//setting the Y position to half of the Y height, as the objects coordinate is the center of the building
     let lotG = new THREE.BoxBufferGeometry(SizeX+20,1,SizeZ+20);//adding the lot just around the building
     let lotM = new THREE.MeshPhongMaterial({color: 0x404040});
     let lot = new THREE.Mesh(lotG,lotM);
