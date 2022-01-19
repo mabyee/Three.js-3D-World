@@ -111,7 +111,6 @@ for(let i=0;i<450;i+=25){
 var forest2 = forest.clone();
 forest2.position.set(0,0,488);
 
-
 //adding road blocks together to make a longer road
 var road = new THREE.Group();
 road.position.set(-100,-20,475);//defining the starting point
@@ -193,6 +192,12 @@ var update = function()
     if(keyboard[68]){//D Key - Turn right
         camera.rotation.y -= Math.PI/2 * 0.02;
     }
+    if(keyboard[32]){//Space Key - Move up
+        camera.position.y += 0.5;
+    }
+    if(keyboard[16]){//Shift Key - Move down
+        camera.position.y -= 0.5;
+    }
     //car movement
     car.position.x -=0.5;
     if(car.position.x < -450){
@@ -202,23 +207,17 @@ var update = function()
     if(car3.position.z > 450){
         car3.position.z = -450;
     }
-    //testing
-
 };
-
 // scene renderer
 var render = function()
 {
     renderer.render(scene, camera);
 };
-
 // loop
 var loop = function()
 {
     requestAnimationFrame(loop);
-
     update();
     render();
 };
-
 loop();

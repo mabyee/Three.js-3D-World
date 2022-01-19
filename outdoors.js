@@ -50,10 +50,10 @@ function createApartmentBuilding(SizeX,SizeY,SizeZ,colourHEX,PosX,PosZ){ //modul
     lot.position.set(0,-(SizeY/2),0);//making sure the lot starts at the bottom of the building
     return apartmentBuilding;
 }
-apartment.add(createApartmentBuilding(100,100,100,0xf88f8f,350,130));
-apartment.add(createApartmentBuilding(125,80,80,0xf88f8f,150,120));
+apartment.add(createApartmentBuilding(100,100,100,0x139a5b,350,130));
+apartment.add(createApartmentBuilding(125,80,80,0xaea606,150,120));
 apartment.add(createApartmentBuilding(80,150,80,0xf88f8f,-30,200));
-apartment.add(createApartmentBuilding(50,200,50,0xf88f8f,-45,350));
+apartment.add(createApartmentBuilding(50,200,50,0x5b6d56,-45,350));
 
 //temple lot
 var templeLotM = new THREE.MeshPhongMaterial({color: 0x404040});

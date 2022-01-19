@@ -122,12 +122,23 @@ for(let i=0;i<125;i+=25){
     statueBaseClone.castShadow = true;
     temple.add(statueBaseClone);
 }
-//TODO: Tables in Temple
-var tableG = new THREE.CylinderGeometry(6, 2, 10, 16,10);
-var tableM = new THREE.MeshPhongMaterial({color: 0xc32a2a});
-var table = new THREE.Mesh(tableG, tableM);
-table.position.set(20,0,0);
-temple.add(table);
+//Tables in Temple
+function placeTable(x,y){
+    let tableG = new THREE.CylinderGeometry(6, 2, 10, 8);
+    let tableM = new THREE.MeshPhongMaterial({color: 0xf88f8f});
+    let table = new THREE.Mesh(tableG, tableM);
+    let tableBaseG = new THREE.CylinderGeometry(4,4,1,16);
+    let tableBaseM = new THREE.MeshPhongMaterial({color: 0x000000});
+    let tableBase = new THREE.Mesh(tableBaseG,tableBaseM);
+    table.add(tableBase);
+    tableBase.position.set(0,-5,0);
+    table.position.set(x,-6,y);
+    return table;
+}
+temple.add(placeTable(60,-90));
+temple.add(placeTable(80,-120));
+temple.add(placeTable(80,-60));
+temple.add(placeTable(60,-30));
 
 //Tree
 var tree = new THREE.Group;
