@@ -113,6 +113,7 @@ placedRoadLights.add(createLampPost(-200,18,-Math.PI/2));
 placedRoadLights.add(createLampPost(40,80,Math.PI/2));
 placedRoadLights.add(createLampPost(250,18,-Math.PI/2));
 
+//Advert sign "Welcome to Henriville"
 var advertSign = new THREE.Group();
 var advertSignTexture = new THREE.TextureLoader().load("images/welcomeText.png");
 advertSign.position.set(400,25,-170);
@@ -120,13 +121,40 @@ var advertG = new THREE.BoxBufferGeometry(40,20,1);
 var advertM = new THREE.MeshLambertMaterial({map:advertSignTexture});
 var advert = new THREE.Mesh(advertG,advertM);
 
-function createPole(x){
-    let advertPoleG = new THREE.CylinderBufferGeometry(0.5,0.5,20,8);
+function createPole(dia,height,x,y,z){
+    let advertPoleG = new THREE.CylinderBufferGeometry(dia,dia,height,8);
     let advertPoleM = new THREE.MeshPhongMaterial({color: 0x040404});
     let advertPole = new THREE.Mesh(advertPoleG,advertPoleM);
-    advertPole.position.set(x,-10,-1);
+    advertPole.position.set(x,y,z);
     return advertPole;
 }
 advertSign.add(advert);
-advertSign.add(createPole(-10));
-advertSign.add(createPole(10));
+advertSign.add(createPole(0.5,20,-10,-10,-1));
+advertSign.add(createPole(0.5,20,10,-10,-1));
+
+//Flag + Pole
+var flag = new THREE.Group();
+flag.position.set(0,-20,0);
+var flagpole = createPole(1,100,100,50,0);
+flag.add(flagpole);
+var flagTopG = new THREE.PlaneGeometry(30,20,10,10);
+function wave(geom, cycle, height,frameOffset) {
+    var positionAttribute = geom.getAttribute('position'); //get the positions of all vertices
+    const vertex = new THREE.Vector3();
+    const width = (geom.parameters.width);//getting the geometries width
+    for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++){
+        vertex.fromBufferAttribute( positionAttribute, vertexIndex );
+        const PosX = (((vertex.x+frameOffset)*cycle) / width)*(2*Math.PI);
+        //calculate the z position using a sine function
+        var PosZ = Math.sin(PosX)*height;
+        //update the z position using a new value
+        geom.attributes.position.setXYZ( vertexIndex, vertex.x, vertex.y, PosZ );
+    }
+    geom.attributes.position.needsUpdate = true; //updating vertex positions
+    geom.computeVertexNormals(); //updating vertex positions
+}
+flagTop = new THREE.Mesh(flagTopG,advertM);
+flag.add(flagTop);
+flagTop.position.set(85,90,0);
+flagTop.material.side = THREE.DoubleSide; //making the flag (plane) visible from both sides
+flagpole.castShadow = true;

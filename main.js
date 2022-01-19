@@ -52,7 +52,6 @@ for (let i = 0;i<900;i+=51){//raising land inside of river area, hill-like
         planeG.attributes.position.setZ(37+i+j,30);
     }
 }
-
 planeG.attributes.position.needsUpdate = true;
 var plane = new THREE.Mesh(planeG,planeT);
 plane.position.set(50,-20,0);
@@ -132,7 +131,7 @@ scene.add(plane);
 scene.add(torusKnot);
 scene.add(loadingSymbol);
 scene.add(car,car3);
-scene.add(miniCar, miniTree);
+scene.add(miniCar, miniTree, miniFlag);
 scene.add(fountain);
 scene.add(road, road2);
 scene.add(forest, forest2);
@@ -142,7 +141,11 @@ scene.add(temple);
 scene.add(mainLights);
 scene.add(placedRoadLights);
 scene.add(advertSign);
+scene.add(flag);
 
+//Flag wave setup
+var iFrame = 0//initialising iframe
+var ratio = 15;//adjust speed of wave
 //Character controls setup
 //initiate keyboard
 var keyboard = {};
@@ -206,6 +209,12 @@ var update = function()
     car3.position.z +=0.5;
     if(car3.position.z > 450){
         car3.position.z = -450;
+    }
+    //flag wave
+    iFrame ++;
+    frameOffset = iFrame%(flagTopG.parameters.width*ratio);
+    if (plane!=null) {
+        wave(flagTopG, 2, 1,frameOffset/ratio);
     }
 };
 // scene renderer

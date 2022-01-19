@@ -178,4 +178,8 @@ miniCar.rotation.y = Math.PI;
 var miniTree = tree.clone();
 miniTree.scale.set(0.25,0.25,0.25);
 miniTree.position.set(0,-5,-100);
-//Art 5 - Empty
+//Art 5 - Flag
+var miniFlag = flag.clone();
+miniFlag.scale.set(0.1,0.1,0.1);
+miniFlag.position.set(0,-8,-115);
+miniFlag.rotation.y = Math.PI/2;
