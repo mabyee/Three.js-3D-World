@@ -5,7 +5,6 @@ var fountainBaseG = new THREE.CylinderBufferGeometry(20,20,5,32,32,true);
 var fountainBaseM = new THREE.MeshPhongMaterial({color: 0xffffff});
 fountainBaseM.side = THREE.DoubleSide;//render both inside and outside
 var fountainBase = new THREE.Mesh(fountainBaseG,fountainBaseM);
-
 var fountainBottomG = new THREE.CylinderBufferGeometry(20,20,1,32,32);
 var fountainBottom = new THREE.Mesh(fountainBottomG,fountainBaseM);
 fountainBottom.position.set(0,-2,0);
@@ -112,7 +111,6 @@ placedRoadLights.add(createLampPost(-200,18,-Math.PI/2));
 //placedRoadLights.add(createLampPost(160,80,Math.PI/2));
 placedRoadLights.add(createLampPost(40,80,Math.PI/2));
 placedRoadLights.add(createLampPost(250,18,-Math.PI/2));
-
 //Advert sign "Welcome to Henriville"
 var advertSign = new THREE.Group();
 var advertSignTexture = new THREE.TextureLoader().load("images/welcomeText.png");
@@ -120,7 +118,6 @@ advertSign.position.set(400,25,-170);
 var advertG = new THREE.BoxBufferGeometry(40,20,1);
 var advertM = new THREE.MeshLambertMaterial({map:advertSignTexture});
 var advert = new THREE.Mesh(advertG,advertM);
-
 function createPole(dia,height,x,y,z){
     let advertPoleG = new THREE.CylinderBufferGeometry(dia,dia,height,8);
     let advertPoleM = new THREE.MeshPhongMaterial({color: 0x040404});
@@ -131,7 +128,6 @@ function createPole(dia,height,x,y,z){
 advertSign.add(advert);
 advertSign.add(createPole(0.5,20,-10,-10,-1));
 advertSign.add(createPole(0.5,20,10,-10,-1));
-
 //Flag + Pole
 var flag = new THREE.Group();
 flag.position.set(0,-20,0);
@@ -140,14 +136,12 @@ flag.add(flagpole);
 var flagTopG = new THREE.PlaneGeometry(30,20,10,10);
 function wave(geom, cycle, height,frameOffset) {
     var positionAttribute = geom.getAttribute('position'); //get the positions of all vertices
-    const vertex = new THREE.Vector3();
-    const width = (geom.parameters.width);//getting the geometries width
-    for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++){
+    const vertex = new THREE.Vector3(); 
+    const width = (geom.parameters.width); //getting the geometries width
+    for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++){ //loop
         vertex.fromBufferAttribute( positionAttribute, vertexIndex );
-        const PosX = (((vertex.x+frameOffset)*cycle) / width)*(2*Math.PI);
-        //calculate the z position using a sine function
-        var PosZ = Math.sin(PosX)*height;
-        //update the z position using a new value
+        const PosX = (((vertex.x+frameOffset)*cycle) / width)*(2*Math.PI); //calculate the z position using a sine function
+        var PosZ = Math.sin(PosX)*height; //update the z position using a new value
         geom.attributes.position.setXYZ( vertexIndex, vertex.x, vertex.y, PosZ );
     }
     geom.attributes.position.needsUpdate = true; //updating vertex positions

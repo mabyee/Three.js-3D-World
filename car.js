@@ -7,7 +7,7 @@ carBody.receiveShadow = true;
 carBody.castShadow = true;
 carBody.position.set(1,1,1);
 car.add(carBody);
-
+//car wheels
 function createWheel(){ //function for creating as many wheels as I need
     let wheelG = new THREE.CylinderGeometry(3,3,3,16);
     let wheelM = new THREE.MeshPhongMaterial({color:0x333333});
@@ -30,7 +30,7 @@ wheelBR.position.set(11,-1,9);
 car.add(wheelBR);
 wheelBL.position.set(11,-1,-7);
 car.add(wheelBL);
-
+//car top
 var carTopG = new THREE.BoxBufferGeometry(22,7,15);
 var carTopM = new THREE.MeshPhongMaterial({color: 0x787878});
 var carTop = new THREE.Mesh(carTopG,carTopM);
@@ -47,12 +47,10 @@ function createWindow(){
 }
 var carWindowF = createWindow();
 var carWindowB = createWindow();
-
 carWindowF.position.set(0,8,1);
 car.add(carWindowF);
 carWindowB.position.set(10,8,1);
 car.add(carWindowB);
-
 var carWindow2G = new THREE.BoxBufferGeometry(22.1,5,12);
 var carWindow2M = new THREE.MeshPhongMaterial({color: 0xffffff, transparent: true, opacity: 0.4, shininess: 100, emissive: 0x787878});
 var carWindowFront = new THREE.Mesh(carWindow2G,carWindow2M);
@@ -70,15 +68,13 @@ function createDoorHandels(){
 }
 var doorHandleF = createDoorHandels();
 var doorHandleB = createDoorHandels();
-
 car.add(doorHandleF, doorHandleB);
 doorHandleF.position.set(2,4,1);
 doorHandleB.position.set(12,4,1);
 //car light bars
 var lightBarG = new THREE.BoxBufferGeometry(1,1,14);
-var lightBarBM = new THREE.MeshPhongMaterial({color: 0xff160c, emissive: 0xff160c});
+var lightBarBM = new THREE.MeshPhongMaterial({color: 0xff160c, emissive: 0xff160c});//emissive makes the bars material glow in red and white
 var lightBarFM = new THREE.MeshPhongMaterial({color: 0xadd8e6, emissive: 0xadd8e6});
-
 var lightBarB = new THREE.Mesh(lightBarG, lightBarBM);
 var lightBarF = new THREE.Mesh(lightBarG, lightBarFM);
 car.add(lightBarB, lightBarF);
@@ -89,7 +85,6 @@ var miniCar = car.clone();
 //adding lights to the car
 var lightBarLightF = new THREE.PointLight(0xadd8e6,0.8,150);
 lightBarLightF.castShadow = true;
-
 car.add(lightBarLightF);
 lightBarLightF.position.set(-14.1,4,1);
 var lightBarLightB = new THREE.PointLight(0xff160c,0.5,50);

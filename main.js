@@ -1,19 +1,16 @@
 //var collection
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
-
 //setup
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(55, windowWidth / windowHeight, 0.1, 3000 )
 camera.position.set(0,0,14);
-
 // renderer setup
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(windowWidth, windowHeight);
 document.body.appendChild(renderer.domElement);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.BasicShadowMap;//best performance shadow map
-
 //adjust size on windows resize
 window.addEventListener('resize',function()
 {
@@ -23,10 +20,8 @@ window.addEventListener('resize',function()
     camera.aspect = width/height;
     camera.updateProjectionMatrix();
 });
-
 //OrbitControls
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
-
 // lighting
 var mainLights = new THREE.Group();
 var skyLight = new THREE.PointLight(0xffffbb, 1,1000);
@@ -36,8 +31,7 @@ mainLights.add(skyLight);
 
 var hemisphere = new THREE.HemisphereLight(0xffffbb,0x080820,0.3);
 mainLights.add(hemisphere);
-
-//---PLANE---
+//Plane
 var planeG = new THREE.PlaneGeometry(1000,1000,50,50);
 var planeT = new THREE.MeshPhongMaterial({color: 0x348c31});
 for (let i = 0;i<1000;i+=51){//loop to deform plane for a river
@@ -67,8 +61,7 @@ var riverPlane = new THREE.Mesh(riverPlaneG,fountainWaterM);
 riverPlane.rotation.x = -Math.PI/2;
 scene.add(riverPlane);
 riverPlane.position.set(350,-21,-300);
-
-//SkyBox
+//SkyBox and texture loading
 let skyArray = [];
 let ft = new THREE.TextureLoader().load("images/bluecloud_ft.jpg");
 let bk = new THREE.TextureLoader().load("images/bluecloud_bk.jpg");
@@ -76,7 +69,6 @@ let up = new THREE.TextureLoader().load("images/bluecloud_up.jpg");
 let dn = null;//unnecessary to load as not visible
 let rt = new THREE.TextureLoader().load("images/bluecloud_rt.jpg");
 let lf = new THREE.TextureLoader().load("images/bluecloud_lf.jpg");
-
 skyArray.push(new THREE.MeshBasicMaterial( { map: ft }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: bk }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: up }));
@@ -84,7 +76,6 @@ skyArray.push(new THREE.MeshBasicMaterial( { map: dn }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: rt }));
 skyArray.push(new THREE.MeshBasicMaterial( { map: lf }));
 var skyBox = new THREE.Group();
-
 for(let i=0;i<6;i++){
     skyArray[i].side = THREE.BackSide;
     let skyboxG = new THREE.BoxBufferGeometry(2000,2000,2000);
@@ -92,13 +83,11 @@ for(let i=0;i<6;i++){
     skyBox.add(skybox);
 }
 scene.add(skyBox);
-
 //car + 2nd car
 car.position.set(20,-16,60);
 var car3 = car.clone();
 car3.position.set(-90,-16,40);
 car3.rotation.y = Math.PI/2;
-
 //trees
 var forest = new THREE.Group();
 for(let i=0;i<450;i+=25){
@@ -109,7 +98,6 @@ for(let i=0;i<450;i+=25){
 }
 var forest2 = forest.clone();
 forest2.position.set(0,0,488);
-
 //adding road blocks together to make a longer road
 var road = new THREE.Group();
 road.position.set(-100,-20,475);//defining the starting point
@@ -125,7 +113,6 @@ road2.position.set(525,-20,50);
 road2.rotation.y = Math.PI;
 road.receiveShadow = true;
 road2.receiveShadow = true;
-
 //adding objects to scene
 scene.add(plane);
 scene.add(torusKnot);
@@ -142,7 +129,6 @@ scene.add(mainLights);
 scene.add(placedRoadLights);
 scene.add(advertSign);
 scene.add(flag);
-
 //Flag wave setup
 var iFrame = 0//initialising iframe
 var ratio = 15;//adjust speed of wave
@@ -157,9 +143,9 @@ function keyUp(event){
 }
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
-
+//light on/off setup
 var skyLightStatus = true;
-// logic
+//logic
 var update = function()
 {
     torusKnot.rotation.x += 0.005;
@@ -217,12 +203,12 @@ var update = function()
         wave(flagTopG, 2, 1,frameOffset/ratio);
     }
 };
-// scene renderer
+//scene renderer
 var render = function()
 {
     renderer.render(scene, camera);
 };
-// loop
+//loop
 var loop = function()
 {
     requestAnimationFrame(loop);

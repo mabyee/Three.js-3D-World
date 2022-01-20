@@ -9,19 +9,18 @@ function twisting(geometry, degree) { //twisting the pillars
     let quaternion = new THREE.Quaternion();
     let positionAttribute = geometry.getAttribute('position');
     let vertex = new THREE.Vector3();
-    for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++ ) {
+    for ( let vertexIndex = 0; vertexIndex < positionAttribute.count; vertexIndex++ ) {//loop
         vertex.fromBufferAttribute( positionAttribute, vertexIndex );
         let yPos = vertex.y;
         let upVec = new THREE.Vector3(0, 1, 0);
-        quaternion.setFromAxisAngle(upVec, (Math.PI/180)*degree*yPos);
+        quaternion.setFromAxisAngle(upVec, (Math.PI/180)*degree*yPos);//quaternion used to calulate the rotation to a Vector3, thus finding a point
         vertex.applyQuaternion(quaternion);
         geometry.attributes.position.setXYZ( vertexIndex, vertex.x, vertex.y, vertex.z ); //adjusting vertex positions
     }
     geometry.attributes.position.needsUpdate = true;
     geometry.computeVertexNormals(); //updating the vertex positions
 }
-var temple = new THREE.Group(); // adding all objects as one for efficiency
-
+var temple = new THREE.Group(); // adding all objects as one to avoid adding items seperately to the scene
 //pillar base and top
 var pillarBaseG = new THREE.BoxBufferGeometry(7,2,7);
 var pillarBase = new THREE.Mesh(pillarBaseG,pillarM);
@@ -39,17 +38,14 @@ pillarTop.position.set(0,11,0);
 var templeRoofG = new THREE.BoxBufferGeometry(100,10,150);
 var templeRoof = new THREE.Mesh(templeRoofG,pillarM);
 templeRoof.position.set(40,16,-65);
-
 var templefloorG = new THREE.BoxBufferGeometry(100,2,150);
 var templeFloor = new THREE.Mesh(templefloorG,pillarM);
 templeFloor.position.set(40,-12,-65);
-
 temple.add(templeFloor, templeRoof);
 templeFloor.receiveShadow = true;
 templeFloor.castShadow = true;
 templeRoof.receiveShadow = true;
 templeRoof.castShadow = true;
-
 var templeStairG = new THREE.BoxBufferGeometry(100,2,40);
 var templeStair = new THREE.Mesh(templeStairG,pillarM);
 for(let i = 0; i < 10; i+=2){
@@ -72,7 +68,6 @@ function createWall(SizeX,SizeY,SizeZ,PosX,PosY,PosZ){
 temple.add(createWall(8,42,130,-14,0,-75));
 temple.add(createWall(8,42,130,94,0,-75));
 temple.add(createWall(116,42,5,40,0,-140));
-
 //pillars
 for(let i = 0; i < 100; i+=20){ //adjusted so the distance between pillars is 20
     var pillarClone = pillar.clone();
@@ -89,27 +84,26 @@ var statueBase = new THREE.Mesh(statueBaseG,statueBaseM);
 statueBase.castShadow = true;
 statueBase.receiveShadow = true;
 statue.add(statueBase);
-
+//light holders
 var templeLightG = new THREE.BoxBufferGeometry(2,2,2);
 var templeLightM = new THREE.MeshPhongMaterial({color: 0x505050});
 var templeLight = new THREE.Mesh(templeLightG,templeLightM);
 templeLight.receiveShadow = true;
 templeLight.castShadow = true;
 templeLight.position.set(0,21,0);
-
 var templeLightG2 = new THREE.BoxBufferGeometry(1,1,1);
 var templeLightM2= new THREE.MeshPhongMaterial({color: 0xffffff, emissive: 0xffffff, transparent: true, opacity: 0.8});
 var templeLight2 = new THREE.Mesh(templeLightG2,templeLightM2);
 templeLight.add(templeLight2);
 templeLight2.position.set(0,-1,0);
 statue.add(templeLight);
-
+//Glass cover for statue
 var baseCoverG = new THREE.BoxBufferGeometry(10,15,10);
-var baseCoverM = new THREE.MeshPhongMaterial({color: 0x565656, transparent: true, opacity: 0.2, shininess: 100});
+var baseCoverM = new THREE.MeshPhongMaterial({color: 0x565656, transparent: true, opacity: 0.2, shininess: 100});//transparent: true and the opacity make it look like glass
 var baseCover = new THREE.Mesh(baseCoverG,baseCoverM);
 baseCover.position.set(0,10,0);
 statue.add(baseCover);
-
+//Lights above statues
 var statueLight = new THREE.PointLight(0xfffff0, 1, 20);
 statue.add(statueLight);
 statueLight.position.set(0,15,0);
@@ -139,7 +133,6 @@ temple.add(placeTable(60,-90));
 temple.add(placeTable(80,-120));
 temple.add(placeTable(80,-60));
 temple.add(placeTable(60,-30));
-
 //Tree
 var tree = new THREE.Group;
 var treeTrunkG = new THREE.CylinderGeometry(2,3,20,10,1);
@@ -178,7 +171,7 @@ miniCar.rotation.y = Math.PI;
 var miniTree = tree.clone();
 miniTree.scale.set(0.25,0.25,0.25);
 miniTree.position.set(0,-5,-100);
-//Art 5 - Flag
+//Art 5 - minFlag
 var miniFlag = flag.clone();
 miniFlag.scale.set(0.1,0.1,0.1);
 miniFlag.position.set(0,-8,-115);
